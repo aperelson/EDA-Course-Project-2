@@ -1,12 +1,12 @@
 plot1 <- function() { 
     ## Read EPA data:
-    NEI <- readRDS("summarySCC_PM25.rds")
+    dfPM25 <- readRDS("summarySCC_PM25.rds")
     
     ## Convert to data.table for easier manipulation:
     library(data.table)
 
-    dtNEI <- data.table(NEI)
-    sumNEI <- dtNEI[,list(sum=sum(Emissions)),by=year]
+    dtPM25 <- data.table(dfPM25)
+    sumPM25 <- dtPM25[,list(sum=sum(Emissions)),by=year]
     
     ## Set option to display Y axis better:
     opt <- options()
@@ -14,8 +14,8 @@ plot1 <- function() {
     options(opt)
     
     ## Create histogram:
-    barplot((sumNEI$sum)/10^6, 
-            names.arg=sumNEI$year, 
+    barplot((sumPM25$sum)/10^6, 
+            names.arg=sumPM25$year, 
             col="wheat", 
             main="Total pm2.5 emission from all sources",
             xlab="Year", 
